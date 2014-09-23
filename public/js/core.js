@@ -108,6 +108,12 @@ videos.controller('mainController', ['$scope', '$http', '$q', 'videoService', fu
 	$scope.editUser = function(id) {
 		console.log('id parameter ', id);
 		// debugger;
+		// if (id === 'new') {
+		// 	$scope.edit = true;
+		// 	$scope.incomplete = true;
+		// 	$scope.name = '';
+		// 	$scope.url = '';
+		// }
 		videoService.updateUser($scope.user, function(user){
 			
 		})

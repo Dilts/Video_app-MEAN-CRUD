@@ -55,13 +55,15 @@ module.exports = function(app) {
 	app.put('/api/users/:user_id', function (req,res){
 
 		User.findOneAndUpdate(req.params._id, function(err, user){
-				if(err)
+				if(err){
 					return res.send(err)
+				}
 				console.log('user to change', user)
 				user.name = req.body.name;
 				user.save(function(err){
-					if (err)
+					if (err){
 						return res.send(err)
+					}
 					res.json(user);
 				})
 			}
