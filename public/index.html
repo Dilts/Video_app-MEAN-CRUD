@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html ng-app = "videos">
+<html ng-app="videos">
 <head>
   <meta charset = "utf-8">
   <meta name = "viewport" content = "width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
-<body ng-controller="mainController" ng-model="collection">
+<body  ng-init="displayUsers()"  ng-controller="mainController" ng-model="collection">
   <div class="container">
 
     <h3>Videos</h3>
@@ -28,8 +28,9 @@
           <th>Description</th>
         </tr>
       </thead>
+
       <tbody>
-        <tr ng-init="" ng-repeat="user in users">
+        <tr ng-repeat="user in users">
           <td>
             <button class="btn" ng-click="editUser(user._id)">
             <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
@@ -50,73 +51,63 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">Name:</label>
         <div class="col-sm-10">
-          <input type="text" ng-model="formData.name"  placeholder="First Name">
+          <input type="text" ng-model="formData.name"  placeholder="First Name" required>
         </div>
       </div> 
       <div class="form-group">
         <label class="col-sm-2 control-label">Url:</label>
         <div class="col-sm-10">
-          <input type="text" ng-model="formData.url" placeholder="Youtube URL">
+          <input type="text" ng-model="formData.url" placeholder="Youtube URL" required>
         </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Title:</label>
         <div class="col-sm-10">
-          <input type="text" ng-model="formData.title" placeholder="Title of Video">
+          <input type="text" ng-model="formData.title" placeholder="Title of Video" required>
         </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Description:</label>
         <div class="col-sm-10">
-          <input type="text" ng-model="formData.desc" placeholder="Enter Description">
+          <input type="text" ng-model="formData.desc" placeholder="Enter Description" required>
         </div>
       </div>
   
       <button class="btn btn-success" ng-click="createUser()">
         <span class="glyphicon glyphicon-user"></span> Upload New Video
       </button>
-
     </form>
-
     <hr>
 
 
 
+<!-- __________________Change an Uploaded Video________________________ -->
 
-
-
-
-
-
-
-
-<!-- __________________Upload a New Video________________________ -->
-
-    <h3 ng-hide="edit">Edit upload:</h3>
+    <h3>Edit upload:</h3>
 
     <form class="form-horizontal", role="form">
       <div class="form-group">
         <label class="col-sm-2 control-label">Name:</label>
         <div class="col-sm-10">
-          <input type="text" ng-model="name" ng-disabled="!edit" placeholder="First Name">
+          <input type="text" ng-model="nameEdit" placeholder="First Name">
         </div>
       </div> 
       <div class="form-group">
         <label class="col-sm-2 control-label">Url:</label>
         <div class="col-sm-10">
-          <input type="text" ng-model="url" ng-disabled="!edit" placeholder="Youtube URL">
+          <input type="text" ng-model="urlEdit" placeholder="Youtube URL">
         </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Title:</label>
         <div class="col-sm-10">
-          <input type="text" ng-model="title" placeholder="Title of Video">
+          <input type="text" ng-model="titleEdit" placeholder="Title of Video">
         </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Description:</label>
         <div class="col-sm-10">
-          <input type="text" ng-model="desc" placeholder="Enter Description">
+          <input type="text" ng-model="descEdit" placeholder="Enter Description">
         </div>
       </div>
           <button class="btn" ng-click="saveChanges(user.id)">
