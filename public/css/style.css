@@ -1,0 +1,75 @@
+
+.container {
+	width: 100%;
+}
+
+.page-header {
+	text-align: center;
+	font-style: italic;
+	font-weight: lighter;
+	font-family: Times, serif;
+}
+
+.row {
+	margin-top: 80px;
+}
+
+.input-group {
+	width: 40%;
+	margin: 0 30% 15px 30%;
+}
+
+.margin-style {
+	margin-top: 10px;
+	margin-bottom: 10px
+}
+
+.btn-lg {
+	margin-left: 47%;
+	margin-bottom: 35px;
+}
+
+.well {
+	text-align: center;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding-top: 17px;
+}
+
+.top {
+	margin-top: 5px;
+}
+
+.btn-default {
+	float: right;
+}
+
+.categories {
+	text-align: center;
+}
+
+.time-stamp {
+	float: left;
+}
+
+.checkbox {
+	display: inline;
+	margin-left: 12px;
+	margin-right: 12px;
+}
+
+#coms {
+	margin: 20px auto 0px auto;
+}
+
+.coms-style {
+	margin-bottom: 10px;
+	margin-top: -10px;
+}
+
+.panel {
+	margin-top: 20px;
+	margin-bottom: -10px;
+}
+
+
