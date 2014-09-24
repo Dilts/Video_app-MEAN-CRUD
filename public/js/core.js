@@ -30,8 +30,8 @@ videos.factory('videoService', function ($http) {
 					return callback(data)
 				});
 		},
-		updateUser:function(id, callback) {
-			$http.put('/api/users/' + id).success(function(data)
+		updateUser:function(id, editData_id, editData, callback) {
+			$http.put('/api/users/' + id, {'editData': editData, 'editData_id': editData_id}).success(function(data)				
 				{ console.log('grab from the server:', data);
 					return callback(data);
 				}).error(function(data) {
@@ -49,6 +49,25 @@ videos.factory('videoService', function ($http) {
 
 
 
+// App.config(function($sceDelegateProvider, apiUrl) {
+//   $sceDelegateProvider.resourceUrlWhitelist([
+//    'self',
+//    "http://www.youtube.com/embed/**"
+//   ];
+// });
+// videos.config(function($sceDelegateProvider) {
+//   $sceDelegateProvider.resourceUrlWhitelist([
+//     // Allow same origin resource loads.
+//     'self',
+//     // Allow loading from our assets domain.  Notice the difference between * and **.
+//     'http://youtube.com/**'
+//   ]);
+
+//   // The blacklist overrides the whitelist so the open redirect here is blocked.
+//   $sceDelegateProvider.resourceUrlBlacklist([
+//     'http://myapp.example.com/clickThru**'
+//   ]);
+// });
 
 
 // ______________Controller____________
@@ -62,13 +81,17 @@ videos.controller('mainController', ['$scope', '$http', '$q', 'videoService', fu
 	$scope.formData.url = null;
 	$scope.formData.title = null;
 	$scope.formData.desc = null;
+	$scope.formData.category = [];
 
 	$scope.editData = {};
-	$scope.edit = [];
 	$scope.editData.name = null;
 	$scope.editData.url = null;
 	$scope.editData.title = null;
 	$scope.editData.desc = null;
+	$scope.editData.id = null;
+
+
+
 
 	$scope.createUser = function() {
 		var userDefer = $q.defer();
@@ -77,7 +100,6 @@ videos.controller('mainController', ['$scope', '$http', '$q', 'videoService', fu
 
 			if(user) {
 				console.log('this has come back from services: ', user);
-				// $scope.name = {};
 				$scope.users.push(user);
 				console.log('did I push it here:', $scope.users)
 				userDefer.resolve();
@@ -100,24 +122,37 @@ videos.controller('mainController', ['$scope', '$http', '$q', 'videoService', fu
 				break;
 			}
 		};
-		videoService.deleteUser(id, function(){
-
-		});
+		videoService.deleteUser(id, function(){});
 	};
 
-	$scope.editUser = function(id) {
+	$scope.editUser = function(id, name, url, title, desc) {
 		console.log('id parameter ', id);
-		// debugger;
-		// if (id === 'new') {
-		// 	$scope.edit = true;
-		// 	$scope.incomplete = true;
-		// 	$scope.name = '';
-		// 	$scope.url = '';
-		// }
-		videoService.updateUser($scope.user, function(user){
+		$scope.editData.name = name;
+		$scope.editData.url = url;
+		$scope.editData.title = title;
+		$scope.editData.desc = desc;
+		$scope.editData.id = id;
+
+	
+		// videoService.updateUser($scope.user, function(user){
 			
-		})
+		// })
 	};
+
+	$scope.saveChanges = function(id) {
+		for (var i = 0; i < $scope.users.length; i++) {
+			if ($scope.users[i]._id === $scope.editData.id) {
+				$scope.users[i].name = $scope.editData.name;
+				$scope.users[i].url = $scope.editData.url;
+				$scope.users[i].desc = $scope.editData.desc;
+				$scope.users[i].title = $scope.editData.title;
+				videoService.updateUser($scope.users[i]._id, $scope.editData.id, $scope.editData, function(){});
+				
+				break;
+			}
+		}
+	};
+
 
 
 	$scope.displayUsers = function() {
@@ -127,18 +162,6 @@ videos.controller('mainController', ['$scope', '$http', '$q', 'videoService', fu
 		})
 	};
 
-	// $scope.saveChanges = function(id) {
-	// 	console.log($scope.userId, $scope.users);
-	// 	$http({ method: 'PUT', url: 'http://localhost:6189/users/', data: $scope.users}).
-	// 	                    success(function (data, status, headers, config) {
-	// 	                        console.log('success', data);
-		                       
-	// 	                    }).
-	// 	                    error(function (data, status, headers, config) {
-	// 	                        console.log(data, status);
-	// 	                    });
-
-	// };
 
 
 }]);

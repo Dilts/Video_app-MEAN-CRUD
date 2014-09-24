@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+// var sourceSchema = require('../app/models/sourceSchema.js').Source;
 
 // User Schema
 var userSchema = mongoose.Schema({
@@ -10,7 +11,14 @@ var userSchema = mongoose.Schema({
   url: String,
   title: String,
   desc: String,
-  userID:String
+  userID: String,
+  // source_id: [sourceSchema],
+  category: [{
+    cats: Boolean,
+    dogs: Boolean,
+    fails: Boolean
+  }],
+  time: {type: Date, default: Date.now}
 });
 
 

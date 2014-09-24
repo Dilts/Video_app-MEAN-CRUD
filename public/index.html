@@ -7,7 +7,7 @@
   <meta name = "viewport" content = "width=device-width, initial-scale=1">
 
   <title>MEAN app</title>
-
+  <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -15,7 +15,7 @@
 <body  ng-init="displayUsers()"  ng-controller="mainController" ng-model="collection">
   <div class="container">
 
-    <h3>Videos</h3>
+    <h2>Video Uploads:</h2>
 <!-- ____________________List Users and their uploads________________ -->
 
     <table class="table table-striped">
@@ -32,89 +32,108 @@
       <tbody>
         <tr ng-repeat="user in users">
           <td>
-            <button class="btn" ng-click="editUser(user._id)">
+            <button class="btn" ng-click="editUser(user._id,user.name,user.url,user.title,user.desc)">
             <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
             </button>
           </td>
           <td>{{user.name}}</td>
-          <td>{{user.url}}</td>
-          <!-- <td><iframe width="560" height="315" src="{{ user.url }}" frameborder="0"></iframe></td> -->
+          <td><a href="{{user.url}}">{{user.url}}</a></td>
+         <!--  <td><iframe title="YouTube video player" class="youtube-player" type="text/html" width="425" height="349" ng-src=" {{trustSCR(user.url)}} " frameborder="0"></iframe></td> -->
           <td>{{ user.title }}</td>
           <td>{{ user.desc }}</td>
           <td><a ng-click="removeUser(user._id)" class="btn btn-small btn-danger">delete</a></td>
         </tr>
       </tbody>
     </table>
+    <hr>
 
-    <hr>
-    <form class="form-horizontal", role="form">
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Name:</label>
-        <div class="col-sm-10">
-          <input type="text" ng-model="formData.name"  placeholder="First Name" required>
+    <div class="row">
+    <div class="col-md-6 new-upload">
+      <h3>New upload:</h3>
+      <form class="form-horizontal", role="form">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Name:</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="formData.name"  placeholder="First Name" required>
+          </div>
+        </div> 
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Url:</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="formData.url" placeholder="Youtube URL" required>
+          </div>
         </div>
-      </div> 
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Url:</label>
-        <div class="col-sm-10">
-          <input type="text" ng-model="formData.url" placeholder="Youtube URL" required>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Title:</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="formData.title" placeholder="Title of Video" required>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Title:</label>
-        <div class="col-sm-10">
-          <input type="text" ng-model="formData.title" placeholder="Title of Video" required>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Description:</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="formData.desc" placeholder="Enter Description" required>
+          </div>
+
+          <label class="radio-inline">
+            <input type="radio" name="addOptions" value="Cats" ng-model="formData.category.cats">
+            Cats
+          </label>       
+          
+          <label class="radio-inline">
+            <input type="radio" name="addOptions" value="Dogs" ng-model="formData.category.dogs">
+            Dogs
+          </label>       
+          
+          <label class="radio-inline">
+            <input type="radio" name="addOptions" value="Fails" ng-model="formData.category.fail">
+            Fails
+          </label>  
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Description:</label>
-        <div class="col-sm-10">
-          <input type="text" ng-model="formData.desc" placeholder="Enter Description" required>
-        </div>
-      </div>
-  
-      <button class="btn btn-success" ng-click="createUser()">
-        <span class="glyphicon glyphicon-user"></span> Upload New Video
-      </button>
-    </form>
-    <hr>
+    
+        <button class="btn btn-success upload" ng-click="createUser()">
+          <span class="glyphicon glyphicon-user"></span> Upload New Video
+        </button>
+      </form>
+    </div>
 
 
 
 <!-- __________________Change an Uploaded Video________________________ -->
-
-    <h3>Edit upload:</h3>
-
-    <form class="form-horizontal", role="form">
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Name:</label>
-        <div class="col-sm-10">
-          <input type="text" ng-model="name" ng-disabled="!edit" placeholder="First Name">
+    <div class="col-md-6 edit-upload">
+      <h3>Edit upload:</h3>
+      <form class="form-horizontal", role="form">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Name:</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="editData.name" placeholder="First Name">
+          </div>
+        </div> 
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Url:</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="editData.url" placeholder="Youtube URL">
+          </div>
         </div>
-      </div> 
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Url:</label>
-        <div class="col-sm-10">
-          <input type="text" ng-model="url" ng-disabled="!edit" placeholder="Youtube URL">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Title:</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="editData.title" placeholder="Title of Video">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Title:</label>
-        <div class="col-sm-10">
-          <input type="text" ng-model="title" placeholder="Title of Video">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Description:</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="editData.desc" placeholder="Enter Description">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Description:</label>
-        <div class="col-sm-10">
-          <input type="text" ng-model="desc" placeholder="Enter Description">
-        </div>
-      </div>
-          <button class="btn" ng-click="saveChanges(user.id)">
-        <!-- <button class="btn btn-success" ng-disabled="error || incomplete" type="submit"> -->
-          <span class="glyphicon glyphicon-save"></span>Save Changes</button>
-    </form>
-
+            <button class="btn btn-warning upload" ng-click="saveChanges(user.id)">
+          <!-- <button class="btn btn-success" ng-disabled="error || incomplete" type="submit"> -->
+            <span class="glyphicon glyphicon-save"></span>Save Changes
+            </button>
+      </form>
+    </div>
+    </div>
     <hr>
 
   </div>

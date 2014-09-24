@@ -9,11 +9,13 @@ module.exports = function(app) {
 // Display all users in the DB
 	app.get('/api/users', function(req, res){
 		User.find(function(err, users){
-			if (err)
+			if (err){
 				res.send(err);
-		
-			return res.json(users);
-			});	
+			}
+			else {
+				return res.json(users);
+			}
+		});	
 	});
 
 
@@ -26,17 +28,14 @@ module.exports = function(app) {
 		    url: req.body.url,
 		    title: req.body.title,
 		    desc: req.body.desc,
+		    category: req.body.category, 
 		}, function(err, user){
 			if (err){
 				return res.send(err);
 			}
-			// User.find({name: user.name}, function(err, user) {
-			// 	if(err){
-			// 		return res.send(err);
-			// 	}
-			// 	console.log('server side: ', user)
+			else{
 				return res.json(user);
-			// });	
+			}
 		});
 	});
 
@@ -44,28 +43,28 @@ module.exports = function(app) {
 		User.findByIdAndRemove(
 			req.params._id, 
 			function(err){
-				if(err)
+				if(err){
 					res.send(err)
-			
-				return res.send();
+				}
+				else{
+					return res.send();
+				}
 			}
 		);
 	});
 
-	app.put('/api/users/:user_id', function (req,res){
 
-		User.findOneAndUpdate(req.params._id, function(err, user){
+
+	app.put('/api/users/:_id', function (req,res){
+		console.log(req)
+		User.findByIdAndUpdate(req.params._id, req.body.editData, function(err, user){
+
 				if(err){
-					return res.send(err)
+					return res.send(err);
 				}
-				console.log('user to change', user)
-				user.name = req.body.name;
-				user.save(function(err){
-					if (err){
-						return res.send(err)
-					}
-					res.json(user);
-				})
+				else {
+					return res.send(200, user);
+				}
 			}
 		);
 	});

@@ -24,10 +24,10 @@
 	margin-bottom: 10px
 }
 
-.btn-lg {
+/*.btn-lg {
 	margin-left: 47%;
 	margin-bottom: 35px;
-}
+}*/
 
 .well {
 	text-align: center;
@@ -40,9 +40,7 @@
 	margin-top: 5px;
 }
 
-.btn-default {
-	float: right;
-}
+
 
 .categories {
 	text-align: center;
@@ -71,5 +69,18 @@
 	margin-top: 20px;
 	margin-bottom: -10px;
 }
+
+/*.new-upload {
+	margin-top: 20px;
+}
+
+.edit-upload {
+	margin-top: 20px;
+}*/
+
+.upload{
+	margin-left: 50px;
+}
+	
 
 
