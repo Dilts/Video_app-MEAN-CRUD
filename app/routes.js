@@ -47,7 +47,7 @@ module.exports = function(app) {
 					res.send(err)
 				}
 				else{
-					return res.send();
+					return res.send(200);
 				}
 			}
 		);

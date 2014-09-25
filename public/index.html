@@ -5,15 +5,39 @@
 <head>
   <meta charset = "utf-8">
   <meta name = "viewport" content = "width=device-width, initial-scale=1">
-
   <title>MEAN app</title>
-  <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link href="css/style.css" rel="stylesheet">
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
+
 <body  ng-init="displayUsers()"  ng-controller="mainController" ng-model="collection">
+
   <div class="container">
+  <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <img class="header-img" src="/images/ct-full-logo.png">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" >
+      <ul class="nav navbar-nav">
+        <li class="underline1"><a href="#linktoupload" ng-click="uploads = !uploads">Upload Video</a></li>
+        <li class="underline2"><a href="#" ng-click="edits = !edits">Edit Upload</a></li>
+      </ul>
+    </div>      
+    </div>
+  </nav>
+
 
     <h2>Video Uploads:</h2>
 <!-- ____________________List Users and their uploads________________ -->
@@ -21,7 +45,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Edit</th>
+          <th ng-show="edits">Edit</th>
           <th>Name</th>
           <th>URL</th>
           <th>Title</th>
@@ -31,7 +55,7 @@
 
       <tbody>
         <tr ng-repeat="user in users">
-          <td>
+          <td ng-show="edits">
             <button class="btn" ng-click="editUser(user._id,user.name,user.url,user.title,user.desc)">
             <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
             </button>
@@ -48,9 +72,10 @@
     <hr>
 
     <div class="row">
-    <div class="col-md-6 new-upload">
+    <div class="col-md-6 new-upload" ng-show="uploads">
+      <a name="linktoupload"></a>
       <h3>New upload:</h3>
-      <form class="form-horizontal", role="form">
+      <form class="form-horizontal", role="form" >
         <div class="form-group">
           <label class="col-sm-2 control-label">Name:</label>
           <div class="col-sm-10">
@@ -70,23 +95,23 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Description:</label>
+          <label class="col-sm-2 control-label des">Description:</label>
           <div class="col-sm-10">
             <input type="text" ng-model="formData.desc" placeholder="Enter Description" required>
           </div>
 
           <label class="radio-inline">
-            <input type="radio" name="addOptions" value="Cats" ng-model="formData.category.cats">
+            <input type="radio" name="category" value="Cats" ng-model="formData.category">
             Cats
           </label>       
           
           <label class="radio-inline">
-            <input type="radio" name="addOptions" value="Dogs" ng-model="formData.category.dogs">
+            <input type="radio" name="category" value="Dogs" ng-model="formData.category">
             Dogs
           </label>       
           
           <label class="radio-inline">
-            <input type="radio" name="addOptions" value="Fails" ng-model="formData.category.fail">
+            <input type="radio" name="category" value="Fails" ng-model="formData.category">
             Fails
           </label>  
         </div>
@@ -100,9 +125,9 @@
 
 
 <!-- __________________Change an Uploaded Video________________________ -->
-    <div class="col-md-6 edit-upload">
+    <div class="col-md-6 edit-upload" ng-show="edits">
       <h3>Edit upload:</h3>
-      <form class="form-horizontal", role="form">
+      <form class="form-horizontal", role="form" >
         <div class="form-group">
           <label class="col-sm-2 control-label">Name:</label>
           <div class="col-sm-10">
@@ -122,7 +147,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Description:</label>
+          <label class="col-sm-2 control-label des">Description:</label>
           <div class="col-sm-10">
             <input type="text" ng-model="editData.desc" placeholder="Enter Description">
           </div>

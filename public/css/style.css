@@ -11,7 +11,7 @@
 }
 
 .row {
-	margin-top: 80px;
+	margin-top: 30px;
 }
 
 .input-group {
@@ -24,17 +24,8 @@
 	margin-bottom: 10px
 }
 
-/*.btn-lg {
-	margin-left: 47%;
-	margin-bottom: 35px;
-}*/
 
-.well {
-	text-align: center;
-	margin-left: 10%;
-	margin-right: 10%;
-	padding-top: 17px;
-}
+
 
 .top {
 	margin-top: 5px;
@@ -46,9 +37,7 @@
 	text-align: center;
 }
 
-.time-stamp {
-	float: left;
-}
+
 
 .checkbox {
 	display: inline;
@@ -56,14 +45,8 @@
 	margin-right: 12px;
 }
 
-#coms {
-	margin: 20px auto 0px auto;
-}
 
-.coms-style {
-	margin-bottom: 10px;
-	margin-top: -10px;
-}
+
 
 .panel {
 	margin-top: 20px;
@@ -81,6 +64,22 @@
 .upload{
 	margin-left: 50px;
 }
-	
+
+.header-img {
+	height: 24px;
+	width: 155px;
+}
+
+.underline1:hover {
+	border-bottom-color: green;
+	border-bottom-width: 5px;
+	border-bottom-style: solid;
+}
+
+.underline2:hover {
+	border-bottom-color: orange;
+	border-bottom-width: 5px;
+	border-bottom-style: solid;
+}
 
 

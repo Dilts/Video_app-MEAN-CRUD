@@ -13,11 +13,11 @@ var userSchema = mongoose.Schema({
   desc: String,
   userID: String,
   // source_id: [sourceSchema],
-  category: [{
-    cats: Boolean,
-    dogs: Boolean,
-    fails: Boolean
-  }],
+  category: {
+    cats: String,
+    dogs: String,
+    fails: String
+  },
   time: {type: Date, default: Date.now}
 });
 

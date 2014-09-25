@@ -2,7 +2,7 @@ var videos = angular.module( "videos", [] );
 
 // ___________Services______________
 
-
+// Authentication should have been done
 
 
 videos.factory('videoService', function ($http) {
@@ -81,7 +81,7 @@ videos.controller('mainController', ['$scope', '$http', '$q', 'videoService', fu
 	$scope.formData.url = null;
 	$scope.formData.title = null;
 	$scope.formData.desc = null;
-	$scope.formData.category = [];
+	$scope.formData.category = null;
 
 	$scope.editData = {};
 	$scope.editData.name = null;
@@ -89,7 +89,6 @@ videos.controller('mainController', ['$scope', '$http', '$q', 'videoService', fu
 	$scope.editData.title = null;
 	$scope.editData.desc = null;
 	$scope.editData.id = null;
-
 
 
 
