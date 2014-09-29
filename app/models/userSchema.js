@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 // var sourceSchema = require('../app/models/sourceSchema.js').Source;
 
-// User Schema
+// ______________________User Schema____________________
 var userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -12,7 +12,17 @@ var userSchema = mongoose.Schema({
   title: String,
   desc: String,
   userID: String,
-  // source_id: [sourceSchema],
+  source_id: String,
+  // source: [
+  // {_id: Youtube},
+  // {_id: Vimeo}
+  // ],
+  comments: [
+  {
+    name: String,
+    comment: String
+  }],
+  inform: [{dateCreated: {type: Date, default: Date.now}, category: String}],
   category: {
     cats: String,
     dogs: String,
@@ -22,7 +32,7 @@ var userSchema = mongoose.Schema({
 });
 
 
-// Our user model
+// ________________Define User Model_____________________
 var User = mongoose.model('Users', userSchema);
 
 // Make user model available through exports/require

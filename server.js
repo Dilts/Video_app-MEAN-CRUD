@@ -1,11 +1,13 @@
 
+// _______________________Set up___________________________
+
 var express        = require('express');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var app		 	   = express();					 // create our app w/ express
 var mongoose 	   = require('mongoose');			 // mongoose for mongo
 
-
+// ___________________Configuration _______________________
 
 // Connect to mongoDB
 mongoose.connect('mongodb://localhost/ct-app-db');
@@ -24,7 +26,7 @@ app.use(methodOverride());
 
 require('./app/routes')(app);
 
-
+// ________________Listen____________________
 
 var server = app.listen(6189, function() {
 	console.log('Express server listening on port ' + server.address().port);

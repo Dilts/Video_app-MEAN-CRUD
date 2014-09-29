@@ -3,28 +3,40 @@
 	width: 100%;
 }
 
-.page-header {
-	text-align: center;
-	font-style: italic;
-	font-weight: lighter;
-	font-family: Times, serif;
+body{
+	font-family: 'Lato', sans-serif;
+}
+
+/*input {
+	margin-left: 20px;
+}*/
+
+h3 {
+	margin-left: 60px;
+	text-decoration: underline;
 }
 
 .row {
-	margin-top: 30px;
+	margin-top: 40px;
 }
 
-.input-group {
+.col-sm-2 {
+	padding: 0;
+}
+
+./*input-group {
 	width: 40%;
 	margin: 0 30% 15px 30%;
-}
+}*/
 
 .margin-style {
 	margin-top: 10px;
 	margin-bottom: 10px
 }
 
-
+.radiob {
+	padding-left: 40px;
+}
 
 
 .top {
@@ -53,11 +65,11 @@
 	margin-bottom: -10px;
 }
 
-/*.new-upload {
-	margin-top: 20px;
+.new-upload {
+	margin-left: 10px;
 }
 
-.edit-upload {
+/*.edit-upload {
 	margin-top: 20px;
 }*/
 
@@ -81,5 +93,4 @@
 	border-bottom-width: 5px;
 	border-bottom-style: solid;
 }
-
 
